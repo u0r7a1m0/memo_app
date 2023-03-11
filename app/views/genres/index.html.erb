@@ -1,0 +1,31 @@
+<div class="container mx-auto">
+    <h3 class="ml-5"><i class="fab fa-slack-hash"></i>タグ追加</h3>
+    <div class="row my-5 ml-5">
+        <div class="col-md-8">
+            <%= form_with model: @genre, url: genres_path do |f| %>
+            <div class="col-md-10 d-md-flex">
+              <div class="col-md-7">
+                <%=f.text_field:name, placeholder: "タグ名", class: 'form-control mb-3' %>
+              </div>
+              <div class="col-md-4">
+                <button type="submit" class="btn btn-success mb-3">新規登録</button>
+              </div>
+            </div>
+            <% end %>
+        </div>
+    </div>
+    <div class="row ml-5">
+        <div class="col-md-5">
+            <table class="table table-borderless ml-3">
+            <% @genres.each do |genre| %>
+                <tr class="my-auto">
+                  <td><i class="fas fa-hashtag"></i>　<b><%= genre.name %></b></td>
+                  <td>
+                    <%= link_to '編集する', edit_genre_path(genre.id),class: 'btn btn-outline-danger' %>
+                  </td>
+                </tr>
+            <% end %>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="container mx-auto">
+    <div class="row">
+        <div class="col-md-7 mx-auto">
+            <h3><i class="fas fa-edit mr-2"></i>Memo edit</h3>
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <%= form_with model: @memo ,url: memo_path(@memo.id),method: :patch do |f| %>
+            <%= f.text_field :title, autofocus: true, class: "form-control my-3" %>
+            <%= f.text_area :body, class: "form-control mb-3" %>
+            <%= f.collection_select :genre_id, Genre.all, :id, :name, class: "my-3" %>
+            <div class="mt-4">
+                <%= f.submit'変更', class: "btn btn-outline-info" %>
+                <%= link_to "戻る" ,memo_path(@memo.id), class: "ml-3 btn btn-outline-secondary" %>
+                <%= link_to "メモを削除", memo_path, method: :delete, "data-confirm" => "本当に削除しますか？", class: 'ml-3 text-danger' %></p>
+
+            </div>
+            <% end %>
+        </div>
+    </div>
+</div>

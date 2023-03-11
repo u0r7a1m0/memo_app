@@ -1,0 +1,20 @@
+<div class="container mx-auto">
+    <div class="row">
+        <div class="col-md-7 mx-auto">
+            <h3><i class="fas fa-edit mr-2"></i>Tag edit</h3>
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <%= form_with model: @genre ,url: genre_path(@genre.id),method: :patch do |f| %>
+            <%= f.text_field :name, autofocus: true, class: "form-control my-3" %>
+            <div class="mt-4">
+                <%= f.submit'変更', class: "btn btn-outline-info" %>
+                <%= link_to "戻る" ,genres_path, class: "ml-3 btn btn-outline-secondary" %>
+
+            </div>
+            <% end %>
+        </div>
+    </div>
+</div>
