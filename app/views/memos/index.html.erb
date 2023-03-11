@@ -1,34 +1,43 @@
 <div class="container mx-auto">
     <h5 class="ml-5 mb-3 text-dark"><i class="far fa-bookmark mr-2"></i><b>Memo一覧</b></h5>
-    <div class="row ml-4">
+    <div class="row ml-4 d-flex border-top pt-3">
+        <div class="col-md-3">
+            <% @genres.each do |genre| %>
+            <ul class="list-unstyled">
+                <li class="text-info"><i class="fas fa-hashtag"></i> <%= genre.name %></li>
+            </ul>
+            <% end %>
+        </div>
+        
         <div class="col-md-6">
-            
         <%= form_with model: @memo, url: memos_path do |f| %>
-        <%= f.text_field :title, placeholder: "タイトル", class: "form-control mb-3" %>
-        <%= f.text_area :body, placeholder: "メモ本文", class: "form-control mb-3" %>
-        <div><%= f.collection_select :genre_id, Genre.all, :id, :name, include_blank: "選択して下さい", class: "form-select my-3" %></div>
-
-        <button type="submit" class="btn btn-success my-3">新規登録</button>
+            <%= f.text_field :title, placeholder: "タイトル", class: "form-control mb-3" %>
+            <%= f.text_area :body, placeholder: "メモ本文", class: "form-control mb-3" %>
+            <div>
+                <%= f.collection_select :genre_id, Genre.all, :id, :name, include_blank: "選択して下さい", class: "form-select my-3" %>
+            </div>
+            <button type="submit" class="btn btn-success my-3">新規登録</button>
         <% end %>
         </div>
-
-    <div class="col-md-10 border-top pt-3">
-        <div class="d-md-flex flex-wrap">
-        <% @memos.each do |memo| %>
-        <%= link_to memo_path(memo.id) do %>
-            
-        <div class="card m-2" style="width: 12rem;">
-            <%= image_tag 'prog.jpg', class: "card-img-top",:size => '100x100'%>
-          <div class="m-2">
-            <p><b><%= memo.title %></b></p>
-            <p><%= memo.body.truncate(10) %></p>
-            <p class="text-dark"><%= memo.genre.name%></p>
-          </div>
-        </div>
-        <% end %>
-        <% end %>
+        
+        <div class="row border-top pt-3 mx-auto">
+            <div class="col-md-11 mx-auto">
+                <div class="d-md-flex flex-wrap">
+                <% @memos.each do |memo| %>
+                    <%= link_to memo_path(memo.id) do %>
+                    <div class="card m-2" style="width: 13rem;">
+                        <%= image_tag 'prog.jpg', class: "card-img-top",:size => '100x100'%>
+                        <div class="m-2">
+                            <p class="text-dark"><b><%= memo.title %></b><br>
+                            <span class="text-secondary"><%= memo.body.truncate(10) %></span></p>
+                            <p class="text-info"><i class="fas fa-hashtag"></i><%= memo.genre.name%></p>
+                        </div>
+                    </div>
+                    <% end %>
+                <% end %>
+                <%#= paginate @memos %>
+                </div>
+            </div>
         </div>
     </div>
-    </div>
-    
 </div>

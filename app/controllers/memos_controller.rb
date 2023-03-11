@@ -2,6 +2,8 @@ class MemosController < ApplicationController
   def index
     @memo = Memo.new
     @memos = Memo.all.order(created_at: "DESC")
+    @genres = Genre.all
+    # @genre = Genre.find([params[:id]])
   end
   
   def create
